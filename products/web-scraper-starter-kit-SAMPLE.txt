@@ -1,0 +1,29 @@
+Web Scraper Starter Kit - FREE SAMPLE
+=====================================
+
+This is a sample of the full kit ($29). It includes the README and one
+tutorial. The full kit adds: verified scraper code (Playwright headless),
+normalization to JSONL, DuckDB loading, docker-compose, and 4 tutorials.
+
+Full kit: https://nativebranch.github.io/products/web-scraper-starter-kit-v1.1.zip
+(encrypted - buy to unlock: PayPal codelyst.dev@gmail.com or crypto)
+
+More free tutorials: https://futureparse.com/guides (27 published)
+
+---
+READ ME (from the kit)
+---
+Headless-browser scraping foundation: render JS pages, normalize to
+schema-drift-proof JSONL, land in DuckDB/Postgres. Verified end-to-end demo
+included (Hacker News -> 30 records -> DuckDB).
+
+Quickstart:
+  pip install -r requirements.txt
+  python -m playwright install chromium
+  python src/scraper.py https://news.ycombinator.com/ | python src/normalize.py | python src/load_duckdb.py
+
+Full kit contents:
+  - docker-compose.yml (Airbyte ELT, one command)
+  - src/scraper.py, src/normalize.py, src/load_duckdb.py, src/paginate.py
+  - docs/ (4 tutorials)
+  - .demo/ (verified HN demo artifacts)
