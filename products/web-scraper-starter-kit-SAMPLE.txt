@@ -10,6 +10,10 @@ Full kit: https://nativebranch.github.io/products/web-scraper-starter-kit-v1.1.z
 
 More free tutorials: https://futureparse.com/guides (27 published)
 
+Need it built for you? Scraping Pipeline Consulting - $500/project
+(fetch -> plan -> extract -> store -> report, 3-5 days). Email
+codelyst.dev@gmail.com. 50% upfront / 50% on delivery.
+
 ---
 READ ME (from the kit)
 ---
