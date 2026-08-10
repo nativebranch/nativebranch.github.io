@@ -26,17 +26,17 @@ $ dig MX eliteyecare.com
 <p style="font-size:.9rem;color:#666">Simulation for demonstration - no email was actually sent. This is exactly what a phishing email using your domain would look like in a victim's inbox:</p>
 <div style="border:1px solid #ddd;border-radius:8px;overflow:hidden;margin:16px 0">
   <div style="background:#f1f3f4;padding:10px 16px;font-size:13px;color:#444;display:flex;gap:24px">
-    <span><b>From:</b> <span style="color:#1a73e8">Billing Dept</span> &lt;billing@eliteyecare.com&gt;</span>
-    <span><b>To:</b> client@lawfirm-client.com</span>
+    <span><b>From:</b> <span style="color:#1a73e8">Billing Department</span> &lt;billing@eliteyecare.com&gt;</span>
+    <span><b>To:</b> patient@example.com</span>
   </div>
   <div style="background:#fff;padding:16px">
-    <div style="font-size:15px"><b>Subject: Outstanding invoice - payment required</b></div>
-    <div style="font-size:13px;color:#666;margin:8px 0">Dear Client,<br><br>Our records show an outstanding balance of $48,230.00 on invoice #LW-2026-0417.<br>Please arrange payment at the following link: <span style="color:#1a73e8">eliteyecare.com.pay-portal.secure-update.info</span><br><br>Regards,<br>Accounts Receivable</div>
-    <div style="font-size:11px;color:#999;border-top:1px solid #eee;padding-top:6px">NOTE: This is a SIMULATION showing what a spoofed email would look like. It was NOT sent by or to anyone. Because lathamwatkins.com has no SPF/DMARC, real attackers CAN send emails like this that pass spam filters.</div>
+    <div style="font-size:15px"><b>Subject: Your appointment confirmation - action required</b></div>
+    <div style="font-size:13px;color:#666;margin:8px 0">Dear Patient,<br><br>Your upcoming appointment requires confirmation. Please verify your details at: <span style="color:#1a73e8">eliteyecare.com.secure-patient-portal.info</span><br><br>Regards,<br>Front Desk</div>
+    <div style="font-size:11px;color:#999;border-top:1px solid #eee;padding-top:6px">NOTE: This is a SIMULATION showing what a spoofed email would look like. It was NOT sent by or to anyone. Because eliteyecare.com has no SPF/DMARC, real attackers CAN send emails like this that pass spam filters.</div>
   </div>
 </div>
 <h2>What this means for you</h2>
-<p>Emails from your domain are unverifiable. Attackers can send phishing emails to your customers, vendors, and bank that pass as yours. Invoice fraud and customer phishing start exactly like this.</p>
+<p>For a healthcare business, a spoofed email can harvest patient information (HIPAA exposure) or redirect bill payments. Attackers specifically target medical practices because patients trust emails from their provider.</p>
 <h2>The deliverable</h2>
 <p>The full written report: complete findings, raw DNS evidence, business impact analysis, and prioritized remediation recommendations your technical team can implement directly. Delivered within 48 hours. Flat fee $997.</p>
 <p style="margin-top:24px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Report%20eliteyecare.com">Reply: send me the report</a></p>

@@ -22,11 +22,23 @@ $ dig TXT _dmarc.aarfpetcentral.com
 
 $ dig MX aarfpetcentral.com
   (mail is live - spoofed mail gets delivered)</div>
+<h2>What an attacker's email looks like</h2>
+<p style="font-size:.9rem;color:#666">Simulation for demonstration - no email was actually sent. This is exactly what a phishing email using your domain would look like in a victim's inbox:</p>
+<div style="border:1px solid #ddd;border-radius:8px;overflow:hidden;margin:16px 0">
+  <div style="background:#f1f3f4;padding:10px 16px;font-size:13px;color:#444;display:flex;gap:24px">
+    <span><b>From:</b> <span style="color:#1a73e8">Billing Department</span> &lt;billing@aarfpetcentral.com&gt;</span>
+    <span><b>To:</b> customer@example.com</span>
+  </div>
+  <div style="background:#fff;padding:16px">
+    <div style="font-size:15px"><b>Subject: Your account - action required</b></div>
+    <div style="font-size:13px;color:#666;margin:8px 0">Dear Customer,<br><br>Your account requires verification. Please confirm your details at: <span style="color:#1a73e8">aarfpetcentral.com.secure-verify.info</span><br><br>Regards,<br>Billing</div>
+    <div style="font-size:11px;color:#999;border-top:1px solid #eee;padding-top:6px">NOTE: This is a SIMULATION showing what a spoofed email would look like. It was NOT sent by or to anyone. Because aarfpetcentral.com has no SPF/DMARC, real attackers CAN send emails like this that pass spam filters.</div>
+  </div>
+</div>
 <h2>What this means for you</h2>
 <p>Emails from your domain are unverifiable. Attackers can send phishing emails to your customers, vendors, and bank that pass as yours. Invoice fraud and customer phishing start exactly like this.</p>
-<h2>The fix</h2>
+<h2>The deliverable</h2>
 <p>The full written report: complete findings, raw DNS evidence, business impact analysis, and prioritized remediation recommendations your technical team can implement directly. Delivered within 48 hours. Flat fee $497.</p>
-<p style="font-size:.9rem;color:#666"><b>Why not just add a DNS record?</b> A naive "add SPF and set DMARC to reject" breaks legitimate email: most businesses send from multiple systems (website forms, CRM, marketing tools, transactional mail). The safe fix requires analyzing your actual sending infrastructure, then rolling out policy in stages (monitor - quarantine - reject) so nothing breaks. That analysis is the engagement.</p>
-<p style="margin-top:24px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Fix%20aarfpetcentral.com">Reply: I want this fixed</a></p>
+<p style="margin-top:24px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Report%20aarfpetcentral.com">Reply: send me the report</a></p>
 <div class="footer">&copy; 2026 Cicero Security - futureparse.com. Nothing on your site was accessed or modified.</div>
 </body></html>
