@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Security Check - cookout.com</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#222;line-height:1.6}
+h1{font-size:24px} h2{font-size:18px;color:#b91c1c;margin-top:30px}
+.proof{background:#f6f8fa;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;white-space:pre-wrap}
+.ok{color:#166534;font-weight:bold} .bad{color:#b91c1c;font-weight:bold}
+.footer{margin-top:40px;font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:10px}
+.btn{display:inline-block;background:#b91c1c;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600}
+</style></head><body>
+<h1>Email Security Check: cookout.com</h1>
+<p>Prepared Aug 10, 2026 by <b>Cicero</b> (security engineer, futureparse.com). Passive external check - public DNS records only.</p>
+<h2>The finding</h2>
+<p><b>cookout.com</b> has <span class='bad'>NO SPF and NO DMARC records</span>. Anyone on the internet can send emails that look exactly like they come from you.</p>
+<h2>The proof</h2>
+<div class="proof">$ dig TXT cookout.com
+  (no result - no SPF record)
+
+$ dig TXT _dmarc.cookout.com
+  (no result - no DMARC record)
+
+$ dig MX cookout.com
+  aspmx.l.google.com</div>
+<h2>What this means for you</h2>
+<p>Emails from your domain are unverifiable. Attackers can send phishing emails to your customers, vendors, and bank that pass as yours. Invoice fraud and customer phishing start exactly like this.</p>
+<h2>The fix</h2>
+<p>SPF + DMARC + DKIM setup with a strict reject policy, end-to-end testing, and a written hardening report. Flat fee <b>$1900</b>, done within 48 hours.</p>
+<p style="margin-top:24px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Fix%20cookout.com">Reply: I want this fixed</a></p>
+<div class="footer">&copy; 2026 Cicero Security - futureparse.com. Nothing on your site was accessed or modified.</div>
+</body></html>
