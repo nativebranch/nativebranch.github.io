@@ -15,6 +15,10 @@ button{padding:10px 18px;background:#b91c1c;color:#fff;border:none;border-radius
 <p>Check if your domain can be impersonated. This runs a public DNS lookup (DNS-over-HTTPS) - nothing is stored, nothing is touched.</p>
 <div class="input"><input id="dom" placeholder="yourdomain.com" value=""><button onclick="check()">Check</button></div>
 <div class="result" id="res"></div>
+<div class="cta" id="cta29" style="display:none;"background:#fefce8;border:1px solid #facc15">
+<b>Quick fix option:</b> get the exact DNS records + setup guide for YOUR provider in 24h - <b>$29 one-time</b>.
+<a href="mailto:codelyst.dev@gmail.com?subject=DMARC%20quick%20fix%20for%20my%20domain" style="display:inline-block;margin-top:8px;background:#ca8a04;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none">Get the quick fix ($29)</a>
+</div>
 <div class="cta" id="cta">
 <b>Found a real finding?</b> We prepare the full written report - findings, evidence, impact, and the safe staged fix your team can implement.
 <a href="mailto:codelyst.dev@gmail.com?subject=Security%20report%20for%20my%20domain" style="display:inline-block;margin-top:8px;background:#b91c1c;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none">Request the report ($497-$2,900)</a>
@@ -33,6 +37,7 @@ async function check() {
   const res = document.getElementById('res');
   const cta = document.getElementById('cta');
   res.style.display = 'block'; cta.style.display = 'none';
+  document.getElementById('cta29').style.display = 'none';
   if (!dom || !dom.includes('.')) { res.innerHTML = 'Enter a valid domain.'; return; }
   res.innerHTML = 'Checking ' + dom + '...';
   const spf = await dnsTxt(dom);
@@ -46,6 +51,7 @@ async function check() {
   if (!spfHit && !dmarcHit) {
     out += 'RESULT: <span class="bad">CRITICAL - your domain can be impersonated.</span> Anyone can send phishing emails as you, and they will be delivered.';
     cta.style.display = 'block';
+    document.getElementById('cta29').style.display = 'block';
   } else if (!dmarcHit || pnone) {
     out += 'RESULT: <span class="bad">HIGH - DMARC missing or p=none (no enforcement).</span> Spoofed mail still delivers.';
     cta.style.display = 'block';
