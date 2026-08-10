@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free DMARC Check - Is your domain being impersonated?</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:680px;margin:40px auto;padding:0 20px;color:#222;line-height:1.6}
+h1{font-size:24px} .input{display:flex;gap:8px;margin:16px 0}
+input{flex:1;padding:10px;font-size:15px;border:1px solid #ccc;border-radius:6px}
+button{padding:10px 18px;background:#b91c1c;color:#fff;border:none;border-radius:6px;font-size:15px;cursor:pointer}
+.result{background:#f6f8fa;border-radius:8px;padding:16px;margin-top:16px;font-family:monospace;font-size:13px;white-space:pre-wrap;display:none}
+.bad{color:#b91c1c;font-weight:bold} .ok{color:#166534;font-weight:bold}
+.cta{display:none;background:#fff7ed;border:1px solid #fdba74;border-radius:8px;padding:14px;margin-top:12px}
+.small{font-size:.8rem;color:#666}
+</style></head><body>
+<h1>Free DMARC Check</h1>
+<p>Check if your domain can be impersonated. This runs a public DNS lookup (DNS-over-HTTPS) - nothing is stored, nothing is touched.</p>
+<div class="input"><input id="dom" placeholder="yourdomain.com" value=""><button onclick="check()">Check</button></div>
+<div class="result" id="res"></div>
+<div class="cta" id="cta">
+<b>Found a real finding?</b> We prepare the full written report - findings, evidence, impact, and the safe staged fix your team can implement.
+<a href="mailto:codelyst.dev@gmail.com?subject=Security%20report%20for%20my%20domain" style="display:inline-block;margin-top:8px;background:#b91c1c;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none">Request the report ($497-$2,900)</a>
+</div>
+<p class="small">Powered by public DNS via Cloudflare DoH. No access to your systems. See <a href="security-report-service.html">how it works</a>.</p>
+<script>
+async function dnsTxt(name) {
+  try {
+    const r = await fetch('https://cloudflare-dns.com/dns-query?name=' + encodeURIComponent(name) + '&type=TXT', {headers: {accept: 'application/dns-json'}});
+    const j = await r.json();
+    return (j.Answer || []).map(a => a.data.replace(/"/g, ''));
+  } catch (e) { return []; }
+}
+async function check() {
+  const dom = document.getElementById('dom').value.trim().toLowerCase();
+  const res = document.getElementById('res');
+  const cta = document.getElementById('cta');
+  res.style.display = 'block'; cta.style.display = 'none';
+  if (!dom || !dom.includes('.')) { res.innerHTML = 'Enter a valid domain.'; return; }
+  res.innerHTML = 'Checking ' + dom + '...';
+  const spf = await dnsTxt(dom);
+  const dmarc = await dnsTxt('_dmarc.' + dom);
+  const spfHit = spf.find(t => t.startsWith('v=spf1'));
+  const dmarcHit = dmarc.find(t => t.startsWith('v=DMARC1'));
+  let out = 'Domain: ' + dom + '\n';
+  out += 'SPF: ' + (spfHit ? spfHit.slice(0, 80) : 'NO SPF RECORD') + '\n';
+  out += 'DMARC: ' + (dmarcHit ? dmarcHit.slice(0, 80) : 'NO DMARC RECORD') + '\n\n';
+  const pnone = dmarcHit && dmarcHit.includes('p=none');
+  if (!spfHit && !dmarcHit) {
+    out += 'RESULT: <span class="bad">CRITICAL - your domain can be impersonated.</span> Anyone can send phishing emails as you, and they will be delivered.';
+    cta.style.display = 'block';
+  } else if (!dmarcHit || pnone) {
+    out += 'RESULT: <span class="bad">HIGH - DMARC missing or p=none (no enforcement).</span> Spoofed mail still delivers.';
+    cta.style.display = 'block';
+  } else {
+    out += 'RESULT: <span class="ok">OK - SPF + enforced DMARC present.</span> Your domain is reasonably protected.';
+  }
+  res.innerHTML = out.replace(/\n/g, '<br>');
+}
+</script>
+</body></html>
