@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Security Check - dodge.com</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;color:#222;line-height:1.6}
+h1{font-size:24px} h2{font-size:18px;color:#b91c1c;margin-top:30px}
+.proof{background:#f6f8fa;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;white-space:pre-wrap}
+.ok{color:#166534;font-weight:bold} .bad{color:#b91c1c;font-weight:bold}
+.footer{margin-top:40px;font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:10px}
+.btn{display:inline-block;background:#b91c1c;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600}
+</style></head><body>
+<h1>Email Security Check: dodge.com</h1>
+<p>Prepared Aug 10, 2026 by <b>Cicero</b> (security engineer, futureparse.com). Passive external check - public DNS records only.</p>
+<h2>The finding</h2>
+<p><b>dodge.com</b> has a DMARC record, but its policy is <span class='bad'>p=none (monitor-only)</span>. That means receiving servers are told to <b>take no action</b> on spoofed email - attackers can still send emails that look like they come from you, and they will be delivered.</p>
+<h2>The proof</h2>
+<div class="proof">$ dig TXT _dmarc.dodge.com
+v=DMARC1; p=none; rua=mailto:dmarc_rua@example.com
+
+$ dig MX dodge.com
+dodge-com.mail.protection.outlook.com</div>
+<h2>What an attacker's email looks like</h2>
+<p style="font-size:.9rem;color:#666">Simulation for demonstration - no email was actually sent. This is exactly what a phishing email using your domain would look like in a victim's inbox:</p>
+<div style="border:1px solid #ddd;border-radius:8px;overflow:hidden;margin:16px 0">
+  <div style="background:#f1f3f4;padding:10px 16px;font-size:13px;color:#444;display:flex;gap:24px">
+    <span><b>From:</b> <span style="color:#1a73e8">Dodge</span> &lt;recall@dodge.com&gt;</span>
+    <span><b>To:</b> owner@example.com</span>
+  </div>
+  <div style="background:#fff;padding:16px">
+    <div style="font-size:15px"><b>Subject: Vehicle notice - action required</b></div>
+    <div style="font-size:13px;color:#666;margin:8px 0">Dear Owner,<br><br>Your vehicle requires verification. Please confirm at: <span style="color:#1a73e8">dodge.com.vehicle-verify.info</span><br><br>Regards,<br>Dodge</div>
+    <div style="font-size:11px;color:#999;border-top:1px solid #eee;padding-top:6px">NOTE: This is a SIMULATION showing what a spoofed email would look like. It was NOT sent by or to anyone. Because dodge.com publishes DMARC with p=none, real attackers CAN send emails like this that pass spam filters.</div>
+  </div>
+</div>
+<h2>What this means for you</h2>
+<p>A spoofed vehicle notice from your domain can harvest owner data. Your DMARC is p=none (monitor-only).</p>
+<h2>The deliverable</h2>
+<p>The full written report: complete findings, raw DNS evidence, business impact analysis, and prioritized remediation recommendations your technical team can implement directly - including the safe staged path from p=none to p=quarantine to p=reject so legitimate mail never breaks. Delivered within 48 hours. Flat fee $2900.</p>
+<p style="margin-top:24px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Report%20dodge.com">Reply: send me the report</a></p>
+<div class="footer">&copy; 2026 Cicero Security - futureparse.com. Nothing on your site was accessed or modified.</div>
+</body></html>
