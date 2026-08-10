@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email Security Report - Vulnerability Assessment Service</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;color:#222;line-height:1.65}
+h1{font-size:26px} h2{font-size:19px;color:#b91c1c;margin-top:32px}
+.card{border:1px solid #ddd;border-radius:10px;padding:18px;margin:14px 0}
+.price{color:#b91c1c;font-weight:bold}
+.btn{display:inline-block;background:#b91c1c;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:600}
+.small{font-size:.85rem;color:#666}
+.proof{background:#f6f8fa;border-radius:8px;padding:14px;font-family:monospace;font-size:13px;white-space:pre-wrap}
+.footer{margin-top:48px;font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:12px}
+</style></head><body>
+<h1>Email Security Vulnerability Report</h1>
+<p>We audit your domain's email authentication (SPF, DKIM, DMARC) using <b>passive public-DNS checks only</b> - no access to your systems, nothing installed, nothing touched. You receive a written report your technical team can implement.</p>
+
+<h2>What you get</h2>
+<div class="card">
+<b>The written report (48h delivery):</b>
+<ul>
+<li>Complete findings with raw DNS evidence</li>
+<li>Business impact analysis (phishing, invoice fraud, brand damage)</li>
+<li>Prioritized remediation plan - the safe staged path so legitimate mail never breaks</li>
+<li>Your technical team implements it; we verify the fix after 48h</li>
+</ul>
+<p class="price">$497 - $2,900 flat fee (by company size)</p>
+</div>
+
+<h2>Proof this is real</h2>
+<p>Every report starts with evidence you can verify yourself in 2 minutes:</p>
+<div class="proof">$ dig TXT yourdomain.com
+$ dig TXT _dmarc.yourdomain.com
+$ dig MX yourdomain.com</div>
+<p class="small">Example checks (live, public data): <a href="security-check-lathamwatkins-com.html">lathamwatkins.com</a> · <a href="security-check-quicktrip-com.html">quicktrip.com</a> · <a href="security-check-choicehotels-com.html">choicehotels.com</a></p>
+
+<h2>How to order</h2>
+<ol>
+<li>Email <b>codelyst.dev@gmail.com</b> with your domain.</li>
+<li>We run the passive check (2 minutes).</li>
+<li>You see the proof page free - no obligation.</li>
+<li>Reply "send the report" - payment via PayPal (codelyst.dev@gmail.com).</li>
+<li>Report delivered within 48h.</li>
+</ol>
+
+<p style="margin-top:28px"><a class="btn" href="mailto:codelyst.dev@gmail.com?subject=Security%20report%20for%20my%20domain">Email: start my check</a></p>
+
+<div class="footer">&copy; 2026 Cicero Security - futureparse.com. Passive external checks only; nothing on your site is accessed or modified.</div>
+</body></html>
