@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free JSONL validator and formatter: check, count, and pretty-print JSON Lines.">
+<title>JSONL Validator - free tool</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:860px;margin:30px auto;padding:0 20px;color:#222;line-height:1.6}
+textarea{width:100%;height:260px;font-family:monospace;font-size:13px;border:1px solid #ccc;border-radius:6px;padding:10px;box-sizing:border-box}
+button{background:#0a5fd0;color:#fff;border:0;border-radius:6px;padding:10px 18px;font-size:15px;cursor:pointer;margin:8px 4px 8px 0}
+#out{white-space:pre-wrap;font-family:monospace;font-size:13px;background:#f6f8fa;border-radius:6px;padding:12px;min-height:60px;margin-top:10px}
+.stat{color:#0a7d3c;font-weight:600}
+</style></head><body>
+<h1>JSONL Validator</h1>
+<p>Paste JSON Lines (one JSON object per line). Validate, count, and pretty-print. Free tool by <a href="../index.html">nativebranch</a>.</p>
+<textarea id="in" placeholder='{"sku": "A1", "price": 299.99}
+{"sku": "A2", "price": 199.00}'></textarea>
+<br>
+<button onclick="run()">Validate</button> <button onclick="document.getElementById('in').value='';document.getElementById('out').textContent=''">Clear</button>
+<div id="out"></div>
+<script>
+function run() {
+  var text = document.getElementById('in').value;
+  var lines = text.split(/\r?\n/).filter(function(l){return l.trim()});
+  var ok = 0, bad = 0, errs = [], parsed = [];
+  lines.forEach(function(l, i) {
+    try { parsed.push(JSON.parse(l)); ok++; }
+    catch (e) { bad++; errs.push('line ' + (i+1) + ': ' + e.message); }
+  });
+  var out = '<span class="stat">' + ok + ' valid</span> · ' + bad + ' invalid';
+  if (parsed.length) out += '\n\n' + JSON.stringify(parsed, null, 2).slice(0, 4000);
+  if (errs.length) out += '\n\n' + errs.join('\n');
+  document.getElementById('out').innerHTML = out.replace(/</g, '&lt;');
+}
+</script>
+<p><small><a href="../products.html">Catalog</a> · <a href="https://futureparse.com/guides">Free guides</a></small></p>
+</body></html>
